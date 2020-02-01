@@ -1,12 +1,16 @@
-const http = require("http");
-const getQueryString = require("./getQueryString");
+const express = require("express");
 
-http
-  .createServer((req, res) => {
-    res.writeHead(200, { "Content-Type": "application/json" }); //Mime type
-    const queryObject = getQueryString(req.url);
-    res.write(JSON.stringify(queryObject));
-    res.end();
-  })
+const app = express();
 
-  .listen(8080);
+app.get("/", (request, response) => {
+  response.send("Home Page");
+});
+
+app.get("/profile", (request, response) => {
+  response.send("Profile Page");
+});
+
+const server = app.listen("8888", () => {
+  // console.log("Server Running on Port: " + server.address().port + ".");
+  console.log(`Server Running on Port: ${server.address().port}.`);
+});
